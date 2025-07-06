@@ -3,7 +3,7 @@ import { getTermDepositFinalBalance } from "./getTermDepositFinalBalance";
 
 describe("getTermDepositFinalBalance", () => {
   it("should return 0 if investmentTerm is lower than 3", () =>
-    expect(() =>
+    expect(
       getTermDepositFinalBalance({
         startAmount: 10_000,
         investmentTerm: 2,
@@ -13,7 +13,7 @@ describe("getTermDepositFinalBalance", () => {
     ).toBe(0));
 
   it("should return 0 if investmentTerm is lower than 12 months and annually paid type is selected", () =>
-    expect(() =>
+    expect(
       getTermDepositFinalBalance({
         startAmount: 10_000,
         investmentTerm: 10,
