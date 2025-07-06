@@ -1,4 +1,8 @@
-type InterestPayType = "MONTHLY" | "QUARTERLY" | "ANNUALLY" | "AT_MATURITY";
+export type InterestPayType =
+  | "MONTHLY"
+  | "QUARTERLY"
+  | "ANNUALLY"
+  | "AT_MATURITY";
 
 type Props = {
   startAmount: number;
@@ -17,7 +21,7 @@ const interestPaidTypeMap: Record<InterestPayType, number> = {
 /**
  * @param startAmount Initial principle balance
  * @param investmentTerm Number of time periods elapsed by month
- * @param interestRate Interest rate %
+ * @param interestRate Interest rate in percentage
  * @param interestPaidType Number of times interest applied per time period
  * @returns Term deposit Final balance
  */
@@ -27,14 +31,16 @@ export const getTermDepositFinalBalance = ({
   interestRate,
   interestPaidType,
 }: Props): number => {
+  console.log(startAmount)
+  console.log(investmentTerm)
+  console.log(interestRate)
+  console.log(interestPaidType)
   if (investmentTerm < 3) {
-    throw new Error("Investment term should be equal or greater than 3 months");
+    return 0;
   }
 
   if (investmentTerm < 12 && interestPaidType === "ANNUALLY") {
-    throw new Error(
-      "Annually paid type isn't allowed when investment term is lower than 12 months"
-    );
+    return 0;
   }
 
   const payType = interestPaidTypeMap[interestPaidType];

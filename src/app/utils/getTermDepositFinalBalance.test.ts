@@ -2,7 +2,7 @@ import { describe } from "node:test";
 import { getTermDepositFinalBalance } from "./getTermDepositFinalBalance";
 
 describe("getTermDepositFinalBalance", () => {
-  it("should throw an error if investmentTerm is lower than 3", () =>
+  it("should return 0 if investmentTerm is lower than 3", () =>
     expect(() =>
       getTermDepositFinalBalance({
         startAmount: 10_000,
@@ -10,11 +10,9 @@ describe("getTermDepositFinalBalance", () => {
         interestRate: 1,
         interestPaidType: "MONTHLY",
       })
-    ).toThrow(
-      new Error("Investment term should be equal or greater than 3 months")
-    ));
+    ).toBe(0));
 
-  it("should throw an error if investmentTerm is lower than 12 months and annually paid type is selected", () =>
+  it("should return 0 if investmentTerm is lower than 12 months and annually paid type is selected", () =>
     expect(() =>
       getTermDepositFinalBalance({
         startAmount: 10_000,
@@ -22,11 +20,7 @@ describe("getTermDepositFinalBalance", () => {
         interestRate: 1,
         interestPaidType: "ANNUALLY",
       })
-    ).toThrow(
-      new Error(
-        "Annually paid type isn't allowed when investment term is lower than 12 months"
-      )
-    ));
+    ).toBe(0));
   /**
    * Start deposit amount (e.g. $10,000)
    * Interest rate (e.g. 1.10%)
