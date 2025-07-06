@@ -1,7 +1,7 @@
 "use client";
 
 export const CalculationForm = () => {
-    return (<div>This is client side compoenent</div>)
+  return <div>This is client side component</div>;
 };
 
 export default CalculationForm;
