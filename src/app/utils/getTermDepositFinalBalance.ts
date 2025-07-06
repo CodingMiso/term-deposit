@@ -31,10 +31,6 @@ export const getTermDepositFinalBalance = ({
   interestRate,
   interestPaidType,
 }: Props): number => {
-  console.log(startAmount)
-  console.log(investmentTerm)
-  console.log(interestRate)
-  console.log(interestPaidType)
   if (investmentTerm < 3) {
     return 0;
   }
