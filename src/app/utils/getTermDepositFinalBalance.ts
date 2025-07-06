@@ -1,15 +1,4 @@
-export type InterestPayType =
-  | "MONTHLY"
-  | "QUARTERLY"
-  | "ANNUALLY"
-  | "AT_MATURITY";
-
-type Props = {
-  startAmount: number;
-  investmentTerm: number;
-  interestRate: number;
-  interestPaidType: InterestPayType;
-};
+import { InterestPayType, TermDepositFinalBalanceInput } from "../types/types";
 
 const interestPaidTypeMap: Record<InterestPayType, number> = {
   MONTHLY: 12,
@@ -30,7 +19,7 @@ export const getTermDepositFinalBalance = ({
   investmentTerm,
   interestRate,
   interestPaidType,
-}: Props): number => {
+}: TermDepositFinalBalanceInput): number => {
   if (investmentTerm < 3) {
     return 0;
   }

@@ -1,17 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import {
-  getTermDepositFinalBalance,
-  InterestPayType,
-} from "../utils/getTermDepositFinalBalance";
+import { getTermDepositFinalBalance } from "../utils/getTermDepositFinalBalance";
+import { InterestPayType, TermDepositFinalBalanceInput } from "../types/types";
 
 // TODO: input validation
 export const CalculationForm = () => {
-  const [formData, setFormData] = useState({
-    startAmount: "10000",
-    interestRate: "1.1",
-    investmentTerm: "36",
+  const [formData, setFormData] = useState<TermDepositFinalBalanceInput>({
+    startAmount: 10000,
+    interestRate: 1.1,
+    investmentTerm: 36,
     interestPaidType: "ANNUALLY",
   });
   const shouldShowAnnuallyOption = Number(formData.investmentTerm) >= 12;
@@ -24,24 +22,31 @@ export const CalculationForm = () => {
     interestPaidType: formData.interestPaidType as InterestPayType,
   });
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "number" ? Number(value) : value,
+    }));
+  };
+
   return (
     <div>
-      <div>
+      <div className="mt-4">
         <div className="mt-4">
           <label>
             <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
-              Starting with{" "}
+              Starting with
             </span>
 
             <input
               type="number"
               min="1000"
               id="startAmount"
+              name="startAmount"
               className="mt-0.5 w-full rounded border-gray-300 shadow-sm  dark:border-gray-600 dark:bg-gray-900 dark:text-white"
-              onChange={(e) => {
-                console.log(formData);
-                setFormData({ ...formData, startAmount: e.target.value });
-              }}
+              onChange={handleInputChange}
               value={formData.startAmount}
             />
           </label>
@@ -49,18 +54,16 @@ export const CalculationForm = () => {
         <div className="mt-4">
           <label htmlFor="interestRate">
             <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
-              {" "}
-              Interest rate{" "}
+              Interest rate
             </span>
 
             <div className="relative">
               <input
                 type="number"
                 id="interestRate"
+                name="interestRate"
                 className="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-white"
-                onChange={(e) =>
-                  setFormData({ ...formData, interestRate: e.target.value })
-                }
+                onChange={handleInputChange}
                 value={formData.interestRate}
               />
 
@@ -73,7 +76,7 @@ export const CalculationForm = () => {
         <div className="mt-4">
           <label>
             <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
-              Investment term{" "}
+              Investment term
             </span>
             <div className="relative">
               <input
@@ -81,6 +84,7 @@ export const CalculationForm = () => {
                 min="3"
                 className="mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-white"
                 id="investmentTerm"
+                name="investmentTerm"
                 onChange={(e) => {
                   const investmentTerm = e.target.value;
                   if (
@@ -90,13 +94,10 @@ export const CalculationForm = () => {
                     setFormData({
                       ...formData,
                       interestPaidType: "AT_MATURITY",
-                      investmentTerm: e.target.value,
+                      investmentTerm: Number(e.target.value),
                     });
                   } else {
-                    setFormData({
-                      ...formData,
-                      investmentTerm: e.target.value,
-                    });
+                    handleInputChange(e);
                   }
                 }}
                 value={formData.investmentTerm}
@@ -110,7 +111,7 @@ export const CalculationForm = () => {
         </div>
         <div className="mt-4">
           <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
-            Interest paid{" "}
+            Interest paid
           </span>
           <fieldset className="space-y-3">
             <legend className="sr-only">Interest paid</legend>
@@ -127,12 +128,7 @@ export const CalculationForm = () => {
                   id="interestPaidTypeMonthly"
                   className="sr-only"
                   checked={formData.interestPaidType === "MONTHLY"}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      investmentTerm: e.target.value,
-                    })
-                  }
+                  onChange={handleInputChange}
                 />
               </label>
             </div>
@@ -149,12 +145,7 @@ export const CalculationForm = () => {
                   id="interestPaidTypeQuarterly"
                   className="sr-only"
                   checked={formData.interestPaidType === "QUARTERLY"}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      interestPaidType: e.target.value,
-                    })
-                  }
+                  onChange={handleInputChange}
                 />
               </label>
             </div>
@@ -172,12 +163,7 @@ export const CalculationForm = () => {
                     id="interestPaidTypeAnnually"
                     className="sr-only"
                     checked={formData.interestPaidType === "ANNUALLY"}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        interestPaidType: e.target.value,
-                      })
-                    }
+                    onChange={handleInputChange}
                   />
                 </label>
               </div>
@@ -195,12 +181,7 @@ export const CalculationForm = () => {
                   id="interestPaidTypeAtMaturity"
                   className="sr-only"
                   checked={formData.interestPaidType === "AT_MATURITY"}
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      interestPaidType: e.target.value,
-                    });
-                  }}
+                  onChange={handleInputChange}
                 />
               </label>
             </div>
