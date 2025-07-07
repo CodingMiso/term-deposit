@@ -11,7 +11,7 @@ export type InterestPaidType = z.infer<typeof InterestPaidType>;
 export const StartAmount = z.coerce
   .number()
   .int()
-  .min(0)
+  .min(10)
   .max(1_500_000, "Cannot be greater than %1,500,000");
 
 export const InvestmentTerm = z.coerce
