@@ -42,7 +42,7 @@ export const getTermDepositFinalBalance = (input: {
       startAmount *
       Math.pow(
         1 + interestRate / 100 / payType,
-        (investmentTerm * payType) / 12
+        (investmentTerm * payType) / 12,
       );
   }
 

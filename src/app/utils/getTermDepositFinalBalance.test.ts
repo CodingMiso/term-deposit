@@ -2,16 +2,16 @@ import { describe } from "node:test";
 import { getTermDepositFinalBalance } from "./getTermDepositFinalBalance";
 
 describe("getTermDepositFinalBalance", () => {
-  it("should return 0 if investmentTerm is lower than 3", () =>
+  it("should throw an error if investmentTerm is lower than 3", () =>
     expect(() =>
       getTermDepositFinalBalance({
         startAmount: 10_000,
         investmentTerm: 2,
         interestRate: 1,
         interestPaidType: "MONTHLY",
-      })
+      }),
     ).toThrow(
-      'Validation error: Cannot be lower than 3 months at "investmentTerm"'
+      'Validation error: Cannot be lower than 3 months at "investmentTerm"',
     ));
 
   it("should throw an error if investmentTerm is lower than 12 months and paid type ia ANNUALLY", () =>
@@ -21,9 +21,9 @@ describe("getTermDepositFinalBalance", () => {
         investmentTerm: 10,
         interestRate: 1,
         interestPaidType: "ANNUALLY",
-      })
+      }),
     ).toThrow(
-      "Validation error: Investment term should be equal or greater than 12 months if interest paid type is Annually"
+      "Validation error: Investment term should be equal or greater than 12 months if interest paid type is Annually",
     ));
   /**
    * Start deposit amount (e.g. $10,000)
@@ -56,8 +56,8 @@ describe("getTermDepositFinalBalance", () => {
           interestRate,
           interestPaidType,
           investmentTerm,
-        })
+        }),
       ).toBe(expected);
-    }
+    },
   );
 });

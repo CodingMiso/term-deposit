@@ -34,7 +34,7 @@ export const TermDepositFinalBalanceInput = z
   })
   .refine(
     (obj) => !(obj.interestPaidType === "ANNUALLY" && obj.investmentTerm < 12),
-    "Investment term should be equal or greater than 12 months if interest paid type is Annually"
+    "Investment term should be equal or greater than 12 months if interest paid type is Annually",
   );
 
 export type TermDepositFinalBalanceInput = z.infer<

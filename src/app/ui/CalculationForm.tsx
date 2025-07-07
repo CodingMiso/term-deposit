@@ -34,7 +34,7 @@ export const CalculationForm = () => {
 
   const handleInputChange = (
     value: string,
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const { name } = e.target;
 
@@ -46,7 +46,7 @@ export const CalculationForm = () => {
 
   const handleInvestmentTermInputChange = (
     value: string,
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const investmentTerm = value;
     if (
