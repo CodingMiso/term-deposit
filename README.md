@@ -1,14 +1,17 @@
-# Term deposit calculator page
+# Term deposit calculator
 
 A simple Next.js application for calculating term deposit returns.
 
 ### Install dependencies
+
 Install dependencies with:
 
 ```sh
 pnpm install
 ```
+
 ## Development
+
 ### Start the developer environment
 
 Edit files and save it to see the updated result in your browser.

@@ -66,7 +66,7 @@ export const CalculationForm = () => {
   const shouldShowAnnuallyOption = Number(formData.investmentTerm) >= 12;
 
   return (
-    <div className="">
+    <div>
       <div className="mt-4 max-w-70">
         <div className="mt-4">
           <label>
