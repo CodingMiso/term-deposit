@@ -111,7 +111,7 @@ export const CalculationForm = () => {
           </label>
         </div>
         <div className="mt-4">
-          <label>
+          <label htmlFor="investmentTerm">
             <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
               Investment term (Months)
             </span>
@@ -241,7 +241,7 @@ export const CalculationForm = () => {
           <h2 className="font-bold text-gray-900 text-2xl dark:text-white">
             Final balance
           </h2>
-          <strong className="text-indigo-600 text-2xl">{finalBalance}</strong>
+          <strong data-testid="finalBalance" className="text-indigo-600 text-2xl">{finalBalance}</strong>
         </div>
       )}
     </div>
